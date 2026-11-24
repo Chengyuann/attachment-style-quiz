@@ -1,0 +1,1788 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>依恋风格测试</title>
+  <meta name="description" content="了解你在亲密关系里的安全感、边界感与相处模式。" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231F8A65' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpolygon points='16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76'/%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --bg: #F6F7F6;
+      --surface: #FFFFFF;
+      --surface-muted: #F1F4F2;
+      --ink: #16202A;
+      --ink-secondary: #4B5866;
+      --ink-muted: #6E7B88;
+      --border: #DCE2E6;
+      --theme: #1F8A65;
+      --theme-soft: #EAF5F0;
+      --warn-bg: #FFF8EB;
+      --warn-border: #E5A93C;
+      --warn-ink: #7C4A03;
+      --radius: 8px;
+      --radius-sm: 6px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      letter-spacing: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button {
+      font-family: inherit;
+      letter-spacing: 0;
+    }
+
+    .top-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+
+    .header-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      background: var(--theme-soft);
+      color: var(--theme);
+      border: 1px solid var(--border);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--ink);
+    }
+
+    .header-step {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .nav-tabs {
+      display: inline-flex;
+      align-items: center;
+      background: var(--surface-muted);
+      padding: 3px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      gap: 2px;
+    }
+
+    .tab-btn {
+      border: 0;
+      background: transparent;
+      color: var(--ink-secondary);
+      font-size: 13px;
+      font-weight: 600;
+      height: 34px;
+      padding: 0 12px;
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--ink);
+    }
+
+    .tab-btn.is-active {
+      background: var(--surface);
+      color: var(--ink);
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.06);
+    }
+
+    .page-wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 20px 64px;
+    }
+
+    /* Clean Centered Consumer Quiz */
+    .quiz-shell {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .quiz-main {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 26px;
+    }
+
+    .progress-bar-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: var(--ink-secondary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .scene-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--theme-soft);
+      color: var(--theme);
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .progress-track {
+      height: 6px;
+      background: var(--surface-muted);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--theme);
+      transition: width 0.2s ease;
+    }
+
+    .q-stem {
+      margin: 0 0 8px;
+      font-size: 20px;
+      line-height: 1.5;
+      font-weight: 700;
+      color: var(--ink);
+      min-height: 60px;
+    }
+
+    .q-instruction {
+      margin: 0 0 22px;
+      font-size: 13px;
+      color: var(--ink-muted);
+    }
+
+    .freq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .sjt-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .opt-btn {
+      width: 100%;
+      text-align: left;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 13px 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      min-height: 58px;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .opt-btn:hover {
+      border-color: var(--theme);
+      background: #FAFCFB;
+    }
+
+    .opt-btn.is-selected {
+      border-color: var(--theme);
+      background: var(--theme-soft);
+    }
+
+    .opt-key {
+      width: 26px;
+      height: 26px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: var(--surface-muted);
+      color: var(--ink-secondary);
+      font-size: 13px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .opt-btn.is-selected .opt-key {
+      background: var(--theme);
+      border-color: var(--theme);
+      color: #FFFFFF;
+    }
+
+    .opt-body {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .opt-label {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.42;
+    }
+
+    .opt-hint {
+      font-size: 12px;
+      color: var(--ink-muted);
+      line-height: 1.35;
+    }
+
+    .quiz-footer {
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .btn {
+      height: 40px;
+      padding: 0 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn:hover:not(:disabled) {
+      background: var(--surface-muted);
+    }
+
+    .btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: var(--theme);
+      border-color: var(--theme);
+      color: #FFFFFF;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      filter: brightness(0.93);
+    }
+
+    /* Result Report */
+    .warn-banner {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+      color: var(--warn-ink);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .result-hero-band {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--theme);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 236px minmax(0, 1fr);
+      gap: 24px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .hero-char-frame {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--theme-soft);
+    }
+
+    .hero-char-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .kicker-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .kicker-tag {
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--theme-soft);
+      color: var(--theme);
+    }
+
+    .blend-tag {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--surface-muted);
+      color: var(--ink-secondary);
+      border: 1px solid var(--border);
+    }
+
+    .res-title {
+      margin: 0 0 4px;
+      font-size: 28px;
+      line-height: 1.25;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .res-subtitle {
+      margin: 0 0 10px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--theme);
+    }
+
+    .res-tagline {
+      margin: 0 0 10px;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .res-summary {
+      margin: 0 0 16px;
+      font-size: 14px;
+      color: var(--ink-secondary);
+    }
+
+    .metric-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .metric-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .metric-label {
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    .metric-val {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .analytics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .section-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .section-title {
+      margin: 0 0 4px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .section-desc {
+      margin: 0 0 16px;
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    .coord-svg-wrap {
+      width: 100%;
+      max-width: 370px;
+      margin: 0 auto;
+    }
+
+    .coord-svg-wrap svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .facet-bars, .affinity-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .bar-row {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .bar-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .bar-title {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .bar-num {
+      font-weight: 700;
+      color: var(--ink-secondary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .bar-bg {
+      height: 8px;
+      background: var(--surface-muted);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .bar-fg {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    .secondary-band {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: 96px minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+    }
+
+    .secondary-band img {
+      width: 96px;
+      height: 96px;
+      border-radius: var(--radius);
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+
+    .insight-columns {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .plain-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--ink-secondary);
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .quote-strip {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--ink-secondary);
+    }
+
+    .result-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-bottom: 28px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .gallery-intro {
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .gallery-intro h2, .gallery-intro h3 {
+      margin: 0 0 2px;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .gallery-intro p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--ink-secondary);
+    }
+
+    .filter-seg {
+      display: inline-flex;
+      align-items: center;
+      background: var(--surface-muted);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 3px;
+      gap: 2px;
+      flex-wrap: wrap;
+    }
+
+    .seg-btn {
+      border: 0;
+      background: transparent;
+      color: var(--ink-secondary);
+      font-size: 12px;
+      font-weight: 600;
+      height: 30px;
+      padding: 0 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .seg-btn.is-active {
+      background: var(--surface);
+      color: var(--ink);
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.06);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .arch-tile {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .arch-tile.is-mine {
+      border-color: var(--theme);
+      box-shadow: inset 0 0 0 1px var(--theme);
+    }
+
+    .mine-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 7px;
+      border-radius: 4px;
+      background: var(--ink);
+      color: #FFFFFF;
+    }
+
+    .arch-img-box {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: var(--surface-muted);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .arch-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .arch-body {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      flex: 1;
+    }
+
+    .arch-tag-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .arch-name {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .arch-sub {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-muted);
+    }
+
+    .arch-desc {
+      margin: 4px 0 10px;
+      font-size: 13px;
+      color: var(--ink-secondary);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.52);
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      max-width: 700px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: 24px;
+    }
+
+    .modal-head {
+      display: grid;
+      grid-template-columns: 144px minmax(0, 1fr);
+      gap: 20px;
+      align-items: center;
+      padding-bottom: 18px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-head img {
+      width: 144px;
+      height: 144px;
+      border-radius: var(--radius);
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+
+    @media (max-width: 900px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .analytics-grid, .insight-columns {
+        grid-template-columns: 1fr;
+      }
+      .result-hero-band {
+        grid-template-columns: 160px minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .header-inner {
+        padding: 10px 14px;
+      }
+      .nav-tabs {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .tab-btn {
+        padding: 0 6px;
+        font-size: 12px;
+        justify-content: center;
+      }
+      .page-wrap {
+        padding: 16px 14px 44px;
+      }
+      .quiz-main {
+        padding: 20px 16px;
+      }
+      .freq-grid {
+        grid-template-columns: 1fr;
+      }
+      .result-hero-band, .secondary-band, .modal-head {
+        grid-template-columns: 1fr;
+      }
+      .hero-char-frame {
+        max-width: 220px;
+        margin: 0 auto;
+      }
+      .metric-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="top-header">
+    <div class="header-inner">
+      <div class="brand-group">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </span>
+        <h1 class="brand-title">依恋风格测试</h1>
+      </div>
+
+      <span id="header-step" class="header-step">1 / 32</span>
+
+      <nav id="post-quiz-tabs" class="nav-tabs" aria-label="结果导航" hidden>
+        <button id="tab-result" class="tab-btn is-active" type="button">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <span>我的结果</span>
+        </button>
+        <button id="tab-gallery" class="tab-btn" type="button">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span>全部类型</span>
+        </button>
+        <button id="tab-restart" class="tab-btn" type="button">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+          <span>重新测试</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-wrap">
+    <section id="view-quiz" class="quiz-shell">
+      <div class="quiz-main">
+        <div class="progress-bar-row">
+          <span id="scene-badge" class="scene-pill">日常相处</span>
+          <span id="progress-counter">第 1 / 32 题</span>
+        </div>
+        <div class="progress-track">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+
+        <h2 id="q-stem" class="q-stem"></h2>
+        <p id="q-instruction" class="q-instruction"></p>
+
+        <div id="option-container"></div>
+
+        <div class="quiz-footer">
+          <button id="prev-btn" class="btn" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>上一题</span>
+          </button>
+          <button id="next-btn" class="btn btn-primary" type="button">
+            <span id="next-btn-label">下一题</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-result" hidden>
+      <div id="consistency-banner" class="warn-banner" hidden>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <div id="consistency-text">小提示：你在部分相近情境里的选择前后反差较大，或许最近正处在心态变化期，也可以静下心重测一次看看。</div>
+      </div>
+
+      <div id="result-hero" class="result-hero-band">
+        <div class="hero-char-frame">
+          <img id="res-img" src="" alt="" />
+        </div>
+        <div>
+          <div class="kicker-row">
+            <span id="res-code-tag" class="kicker-tag">你的依恋类型</span>
+            <span id="res-quadrant-tag" class="blend-tag"></span>
+            <span id="res-blend-tag" class="blend-tag" hidden></span>
+          </div>
+          <h2 id="res-name" class="res-title"></h2>
+          <p id="res-subtitle" class="res-subtitle"></p>
+          <p id="res-tagline" class="res-tagline"></p>
+          <p id="res-summary" class="res-summary"></p>
+
+          <div class="metric-strip">
+            <div class="metric-cell">
+              <span class="metric-label">焦虑敏感度</span>
+              <span id="m-anxiety" class="metric-val">0%</span>
+            </div>
+            <div class="metric-cell">
+              <span class="metric-label">亲密回避度</span>
+              <span id="m-avoidance" class="metric-val">0%</span>
+            </div>
+            <div class="metric-cell">
+              <span class="metric-label">关系安全感</span>
+              <span id="m-security" class="metric-val">0%</span>
+            </div>
+            <div class="metric-cell">
+              <span class="metric-label">内心拉扯感</span>
+              <span id="m-disorg" class="metric-val">0%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="analytics-grid">
+        <div class="section-box">
+          <h3 class="section-title">你在亲密关系里的位置</h3>
+          <p class="section-desc">横轴代表对回应与确定感的敏感度，纵轴代表对个人空间与自我保护的需求。</p>
+          <div id="coord-map" class="coord-svg-wrap"></div>
+        </div>
+
+        <div class="section-box">
+          <h3 class="section-title">六个相处细节倾向</h3>
+          <p class="section-desc">看看在日常互动的不同切面里，你最容易出现怎样的心理反应。</p>
+          <div id="facet-bars" class="facet-bars"></div>
+        </div>
+      </div>
+
+      <div class="section-box" style="margin-bottom: 24px;">
+        <h3 class="section-title">与八种依恋风格的契合度</h3>
+        <p class="section-desc">每个人身上往往不止一种色彩，以下是你与八种类型的贴近程度。</p>
+        <div id="affinity-bars" class="affinity-bars"></div>
+      </div>
+
+      <div id="secondary-band" class="secondary-band">
+        <img id="sec-img" src="" alt="" />
+        <div>
+          <div class="kicker-row" style="margin-bottom:4px;">
+            <span class="blend-tag" id="sec-kicker">你的潜在第二面</span>
+          </div>
+          <h3 id="sec-title" class="section-title" style="margin-bottom:6px;"></h3>
+          <p id="sec-desc" style="margin:0; font-size:14px; color:var(--ink-secondary);"></p>
+        </div>
+      </div>
+
+      <div class="insight-columns">
+        <div class="section-box">
+          <h3 class="section-title">在感情里的你</h3>
+          <p id="res-mechanism" style="margin:8px 0 14px; font-size:14px; color:var(--ink-secondary);"></p>
+          <h4 style="margin:0 0 8px; font-size:14px; color:var(--ink);">你的关系闪光点</h4>
+          <ul id="res-strengths" class="plain-list"></ul>
+          <div id="res-partner-view" class="quote-strip"></div>
+        </div>
+
+        <div class="section-box">
+          <h3 class="section-title">相处锦囊</h3>
+          <h4 style="margin:6px 0 8px; font-size:14px; color:var(--ink);">容易卡住的瞬间</h4>
+          <ul id="res-blindspots" class="plain-list" style="margin-bottom:14px;"></ul>
+          <h4 style="margin:0 0 8px; font-size:14px; color:var(--ink);">给你的小建议</h4>
+          <ul id="res-actions" class="plain-list"></ul>
+          <div id="res-match-note" class="quote-strip"></div>
+        </div>
+      </div>
+
+      <div class="result-toolbar">
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button id="share-link-btn" class="btn" type="button">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            <span id="share-link-label">复制分享链接</span>
+          </button>
+          <button id="copy-btn" class="btn" type="button">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span id="copy-label">复制结果文案</span>
+          </button>
+          <button id="poster-btn" class="btn" type="button">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>保存结果卡片</span>
+          </button>
+        </div>
+        <button id="retake-btn" class="btn btn-primary" type="button">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+          <span>重新测试</span>
+        </button>
+      </div>
+
+      <div id="unlocked-cast-section">
+        <div class="gallery-intro">
+          <div>
+            <h3>全部八种依恋类型</h3>
+            <p>看看不同类型的人在亲密关系里分别是什么模样。</p>
+          </div>
+          <div class="filter-seg" role="group" aria-label="类型筛选">
+            <button class="seg-btn is-active" type="button" data-q="all">全部</button>
+            <button class="seg-btn" type="button" data-q="S">安全型</button>
+            <button class="seg-btn" type="button" data-q="A">焦虑型</button>
+            <button class="seg-btn" type="button" data-q="V">回避型</button>
+            <button class="seg-btn" type="button" data-q="D">矛盾型</button>
+          </div>
+        </div>
+        <div id="inline-cast-grid" class="gallery-grid"></div>
+      </div>
+    </section>
+
+    <section id="view-gallery" hidden>
+      <div class="gallery-intro">
+        <div>
+          <h2>八种依恋类型图鉴</h2>
+          <p>点击任一卡片可查看详细的情感特点与相处建议。</p>
+        </div>
+        <div class="filter-seg" role="group" aria-label="图鉴筛选">
+          <button class="seg-btn is-active" type="button" data-q="all">全部</button>
+          <button class="seg-btn" type="button" data-q="S">安全型</button>
+          <button class="seg-btn" type="button" data-q="A">焦虑型</button>
+          <button class="seg-btn" type="button" data-q="V">回避型</button>
+          <button class="seg-btn" type="button" data-q="D">矛盾型</button>
+        </div>
+      </div>
+      <div id="gallery-grid" class="gallery-grid"></div>
+    </section>
+  </main>
+
+  <div id="arch-modal" class="modal-backdrop" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-panel">
+      <div class="modal-head">
+        <img id="modal-img" src="" alt="" />
+        <div>
+          <div class="kicker-row" style="margin-bottom:6px;">
+            <span id="modal-quadrant" class="kicker-tag"></span>
+          </div>
+          <h3 id="modal-title" class="res-title" style="font-size:24px;"></h3>
+          <p id="modal-subtitle" class="res-subtitle" style="margin-bottom:6px;"></p>
+          <p id="modal-tagline" style="margin:0; font-size:14px; font-weight:600; color:var(--ink);"></p>
+        </div>
+      </div>
+      <p id="modal-summary" style="margin:0 0 14px; font-size:14px; color:var(--ink-secondary);"></p>
+      <h4 style="margin:0 0 6px; font-size:14px;">关系闪光点</h4>
+      <ul id="modal-strengths" class="plain-list" style="margin-bottom:14px;"></ul>
+      <h4 style="margin:0 0 6px; font-size:14px;">容易卡住的瞬间</h4>
+      <ul id="modal-blindspots" class="plain-list" style="margin-bottom:14px;"></ul>
+      <h4 style="margin:0 0 6px; font-size:14px;">给TA的相处建议</h4>
+      <ul id="modal-actions" class="plain-list" style="margin-bottom:14px;"></ul>
+      <div id="modal-partner" class="quote-strip" style="margin-bottom:16px;"></div>
+      <div style="display:flex; justify-content:flex-end;">
+        <button id="modal-close-btn" class="btn btn-primary" type="button">知道了</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const QUIZ_DATA = {"frequency_scale":[{"value":1,"label":"几乎从不","hint":"完全不符合我的日常反应"},{"value":2,"label":"很少如此","hint":"只在极个别特殊情境出现"},{"value":3,"label":"偶尔如此","hint":"多数时候不会，偶尔冒出来"},{"value":4,"label":"有时如此","hint":"压力升高或特定情境下较明显"},{"value":5,"label":"经常如此","hint":"在多数亲密互动里都会这样"},{"value":6,"label":"几乎总是","hint":"这是我最典型、本能的第一反应"}],"facets":{"A1":{"name":"渴望回应与确认","short_name":"渴望确认","color":"#E0523C"},"A2":{"name":"迁就体贴与顾虑冲突","short_name":"迁就体贴","color":"#D96B78"},"V1":{"name":"需要个人空间与边界","short_name":"需要空间","color":"#2563EB"},"V2":{"name":"习惯有事自己消化","short_name":"独自消化","color":"#3B6E5C"},"D1":{"name":"想靠近又想后退的拉扯","short_name":"内心拉扯","color":"#C83E5B"},"R1":{"name":"坦诚沟通与关系修复","short_name":"沟通修复","color":"#1F8A65"}},"sjt_bounds":{"A1":{"min_neg":-5.0,"max_pos":17.0},"A2":{"min_neg":-1.2,"max_pos":13.2},"V1":{"min_neg":-3.8,"max_pos":13.6},"V2":{"min_neg":-2.8,"max_pos":12.6},"D1":{"min_neg":-2.0,"max_pos":11.0},"R1":{"min_neg":-6.2,"max_pos":16.0}},"scoring_spec":{"combine_weights":{"part_a":0.68,"part_b":0.32},"sjt_saturation":{"pos_ratio":0.75,"neg_ratio":0.85},"anxiety_weights":{"A1":0.46,"A2":0.34,"D1":0.12,"inv_R1":0.08},"avoidance_weights":{"V1":0.46,"V2":0.34,"D1":0.12,"inv_R1":0.08},"security_weights":{"inv_anxiety":0.34,"inv_avoidance":0.34,"inv_D1":0.14,"R1":0.18},"disorganization_weights":{"D1":0.54,"geom_anx_avo":0.34,"inv_R1":0.12},"prototype_feature_weights":{"A1":1.15,"A2":1.15,"V1":1.15,"V2":1.15,"D1":1.25,"R1":1.2},"rbf_sigma":16.5,"blend_gap_threshold":5.5,"consistency_warning_threshold":48.0},"questions":[{"id":1,"part":"frequency","facet":"A1","reverse":false,"context":"沟通节奏","text":"亲近的人比平时晚了几个小时回消息且没提前说明时，我会反复回想是不是自己哪句话说错了。"},{"id":2,"part":"frequency","facet":"V1","reverse":false,"context":"个人边界","text":"当伴侣希望每天高频报备日常、深度绑定彼此的生活安排时，我会感到透不过气并想往后退。"},{"id":3,"part":"frequency","facet":"R1","reverse":false,"context":"冲突沟通","text":"发生争执、情绪上头时，我能先跟对方说明“我需要缓十分钟，等下回来好好聊”，并在平复后主动接上对话。"},{"id":4,"part":"frequency","facet":"A2","reverse":false,"context":"需求表达","text":"为了不让伴侣失望或破坏气氛，我会先把自己的不满咽回去，顺着对方的意思把场面稳住。"},{"id":5,"part":"frequency","facet":"V2","reverse":false,"context":"情绪求助","text":"遇到难扛的压力或委屈时，我的第一反应是关起门自己消化，不想让最亲近的人看见我狼狈的一面。"},{"id":6,"part":"frequency","facet":"D1","reverse":false,"context":"靠近与防备","text":"我心里明明很渴望有人坚定走向我，可一旦对方真的热烈靠近，我又会突然心慌、想推开或躲远。"},{"id":7,"part":"frequency","facet":"A1","reverse":true,"context":"独处安心感","text":"就算各自忙碌、一两天联系变少，我心里依然踏实，不需要靠试探去确认对方还在不在乎我。"},{"id":8,"part":"frequency","facet":"V1","reverse":true,"context":"亲密接纳","text":"与伴侣建立长期稳定的深度联结让我觉得安心自在，不会让我产生失去自由或被束缚的压迫感。"},{"id":9,"part":"frequency","facet":"A2","reverse":true,"context":"真实立场","text":"当伴侣的提议让我感到勉强或不舒服时，我能直接说出自己的难处，不会为了维持讨喜形象而硬撑。"},{"id":10,"part":"frequency","facet":"V2","reverse":true,"context":"脆弱敞开","text":"在疲惫或难过的时候，我能坦然对伴侣说出“我现在需要你抱抱我、陪我待一会儿”。"},{"id":11,"part":"frequency","facet":"D1","reverse":true,"context":"情感连贯性","text":"我对伴侣的亲近意愿和信任感前后连贯，不会前一天极度依赖、后一天又突然想彻底抽身。"},{"id":12,"part":"frequency","facet":"R1","reverse":true,"context":"争执僵局","text":"一旦和伴侣闹僵，我很容易陷入“要么情绪失控说重话，要么彻底沉默断联好几天”的僵局。"},{"id":13,"part":"frequency","facet":"A1","reverse":false,"context":"微表情解读","text":"伴侣回复语气稍微简短或神情平淡一点，我心里就会拉响警报，担心对方对我的热情正在消退。"},{"id":14,"part":"frequency","facet":"V1","reverse":false,"context":"承诺节奏","text":"关系刚开始升温或聊到长远共同规划时，我会本能地想把重心转回工作或个人爱好上给关系降温。"},{"id":15,"part":"frequency","facet":"A2","reverse":false,"context":"开口顾虑","text":"在关系里提请求之前，我会反复斟酌措辞，生怕显得“事多麻烦”而让对方对我的好感打折。"},{"id":16,"part":"frequency","facet":"V2","reverse":false,"context":"独立惯性","text":"哪怕伴侣主动提出帮忙分担，我嘴边的第一句话依然是“不用管我，我自己能搞定”。"},{"id":17,"part":"frequency","facet":"D1","reverse":false,"context":"防御降温","text":"一旦隐约觉得这段关系将来可能会让我受伤，我会抢在对方变冷之前，先一步把自己的态度冷下来。"},{"id":18,"part":"frequency","facet":"R1","reverse":false,"context":"具体表达","text":"当我感到被忽略或有期待时，我能直接把希望对方做的具体小事讲明白，而不是让对方猜谜或赌气。"},{"id":19,"part":"frequency","facet":"A1","reverse":true,"context":"计划变动","text":"伴侣临时改期或专注处理手头事务时，我能平静理解，不会立刻联想到“我在TA心里不重要了”。"},{"id":20,"part":"frequency","facet":"V1","reverse":true,"context":"亲昵回应","text":"伴侣主动向我靠近、表达想念或亲昵时，我能自然接住并回应这份温度，身体和情绪不会下意识紧绷。"},{"id":21,"part":"frequency","facet":"A2","reverse":true,"context":"分歧自主","text":"当我的看法或喜好和伴侣不一致时，我能自然表达不同意见，不会因为怕对方不高兴就急着改口附和。"},{"id":22,"part":"frequency","facet":"V2","reverse":true,"context":"软肋分享","text":"把心底拿不准的犹豫和脆弱讲给伴侣听，对我来说是一件自然且能让我松一口气的事。"},{"id":23,"part":"frequency","facet":"D1","reverse":true,"context":"稳定评估","text":"关系里出现小误会时，我不会瞬间把对方从“特别懂我的人”推向“根本不可信的人”两个极端。"},{"id":24,"part":"frequency","facet":"R1","reverse":true,"context":"冲突修复","text":"争吵刚平息的时候，就算道理已经讲通了，我也很难在短时间内重新信任对方并恢复自然互动。"},{"id":25,"part":"scenario","context":"情境一 · 消息延迟","text":"周末你给伴侣发了一条认真分享心情的消息，过了四五个小时都没收到回复，却看到TA刚刚给共同好友的朋友圈点了赞。那一刻你最真实的下意识反应是？","options":[{"key":"A","label":"猜TA大概随手刷了一眼手机还没空细回，先忙自己的事，晚点联系上再自然聊起。","weights":{"R1":2.0,"A1":-1.2,"V2":-0.4}},{"key":"B","label":"心里会咯噔一下有点小失落，但能先稳住不脑补，等对方回消息时坦诚说“刚看到你点赞没回我，我有点小在意”。","weights":{"R1":1.8,"A1":0.4}},{"key":"C","label":"立刻坐不住了，忍不住追发消息问“有空点赞没空回我？”或者直接弹语音过去想要个解释。","weights":{"A1":2.4,"D1":0.6,"R1":-0.8}},{"key":"D","label":"默默把原本还想分享的话删掉，等TA晚点回复时也假装没事说“哈哈我也刚忙完”，把委屈藏进肚子里。","weights":{"A2":2.2,"A1":1.0,"V2":0.6}},{"key":"E","label":"心里瞬间冷掉一截，心想“行，那以后我也别这么主动了”，接下来一两天都会故意放慢回复节奏。","weights":{"D1":2.0,"V2":1.4,"V1":0.8,"R1":-0.8}}]},{"id":26,"part":"scenario","context":"情境二 · 独处请求","text":"伴侣下班后状态低落，跟你说“今天太累了，我想自己静一静，今晚先不聊了”。你最接近的第一反应是？","options":[{"key":"A","label":"温和回一句“好，去休息吧，想聊了随时叫我”，随后安心投入自己的安排，心里很笃定。","weights":{"R1":2.0,"A1":-1.0,"V1":-0.8}},{"key":"B","label":"第一秒会闪过一丝担心，但能提醒自己尊重对方节奏，等第二天再温和关心一下状态。","weights":{"R1":1.7,"A1":0.5}},{"key":"C","label":"嘴上很懂事地说“好呀不打扰你”，但一整晚都在翻聊天记录，琢磨是不是自己哪里做得不好惹TA烦了。","weights":{"A2":2.2,"A1":1.2}},{"key":"D","label":"心里很难踏实下来，忍不住多问两句“真的只是工作累吗？你别冷着我”，很需要对方先给颗定心丸。","weights":{"A1":2.3,"R1":-0.6}},{"key":"E","label":"觉得各自清静挺舒服，顺势退回自己的空间；但如果对方连着冷淡两天，我心里也会悄悄筑起防线。","weights":{"V1":1.6,"V2":1.2,"D1":0.8}}]},{"id":27,"part":"scenario","context":"情境三 · 关系升温","text":"你们最近感情升温很快，对方开始频繁畅想未来的共同生活、希望能随时知道彼此动态、周末都腻在一起。你的真实体感更像？","options":[{"key":"A","label":"觉得温暖踏实，既享受亲密升温，也能在自己想独处半天时大大方方跟对方商量空间。","weights":{"R1":2.0,"V1":-1.2,"A1":-0.6}},{"key":"B","label":"心里是开心的，当觉得节奏略快时，会温和说明“我很喜欢和你待着，但周日下午想留半天自己充充电”。","weights":{"R1":1.8,"V1":0.4}},{"key":"C","label":"觉得终于有了梦寐以求的确定感，恨不得把全部空闲时间都留给对方，生怕热度降下来。","weights":{"A1":2.0,"A2":1.0,"V1":-1.0}},{"key":"D","label":"表面上积极配合着对方的热情不敢扫兴，但私下里已经开始觉得有点累、缺少自己的喘息余地。","weights":{"A2":2.0,"V1":0.8,"V2":0.8}},{"key":"E","label":"明显感到一阵束缚和紧绷，会下意识用加班、犯困或其它安排拉开距离，给自己留出安全区。","weights":{"V1":2.4,"V2":1.2,"R1":-0.6}}]},{"id":28,"part":"scenario","context":"情境四 · 受挫脆弱","text":"今天你在工作或学业上受了很大的委屈，整个人非常疲惫挫败。回到和伴侣的互动里，你通常会怎么做？","options":[{"key":"A","label":"自然跟伴侣倾诉今天的糟心事，能坦然靠在对方身边求安慰，聊完心里会松快很多。","weights":{"R1":1.8,"V2":-1.4,"V1":-0.8}},{"key":"B","label":"先自己缓半小时理顺情绪，然后主动告诉伴侣“我今天受了点委屈，想跟你吐槽一下求个抱抱”。","weights":{"R1":1.8,"V2":0.3}},{"key":"C","label":"很渴望对方立刻察觉我的不对劲并哄我；如果对方没听出弦外之音、只顾讲道理，我会瞬间更委屈甚至发火。","weights":{"A1":2.0,"D1":1.0,"R1":-0.8}},{"key":"D","label":"怕把负能量传给伴侣惹人嫌，哪怕提到了也轻描淡写说“小事啦已经解决了”，反过来还去关心对方累不累。","weights":{"A2":2.0,"V2":1.4}},{"key":"E","label":"本能地不想见人也不想多说，只想自己躲起来睡一觉或打游戏扛过去，觉得示弱既没用又不自在。","weights":{"V2":2.4,"V1":1.2,"R1":-0.6}}]},{"id":29,"part":"scenario","context":"情境五 · 争执升级","text":"你们因为一件积压已久的小事吵了起来，对方语气开始变重、带着指责。在情绪冲上来的那一刻，你最常出现的反应是？","options":[{"key":"A","label":"虽然心里也有火，但能把话题拉回事情本身，温和而坚定地把彼此的诉求一条条摊开聊清楚。","weights":{"R1":2.2,"D1":-1.0,"A1":-0.6}},{"key":"B","label":"察觉自己快说重话时会先喊停：“我现在有点激动，给我十五分钟冷静一下，今晚我们一定好好聊完。”","weights":{"R1":2.0,"V2":0.3}},{"key":"C","label":"情绪瞬间被点燃，急着当场把是非对错和在乎程度争出个结果，对方越沉默我就越想追着问到底。","weights":{"A1":2.2,"D1":0.8,"R1":-1.0}},{"key":"D","label":"一看对方语气变凶就心慌，哪怕不全是我的问题，也会赶紧先认错哄好对方，只求快点结束低气压。","weights":{"A2":2.4,"A1":0.8,"R1":-0.6}},{"key":"E","label":"脑子里像拉下了闸门，不想解释也不想争辩，只想立刻结束对话、走开或冷处理，谁也别碰谁。","weights":{"V2":2.0,"V1":1.8,"R1":-1.0}}]},{"id":30,"part":"scenario","context":"情境六 · 交心次日","text":"某天夜晚你们聊了很多平时从不外露的心底话，气氛极其亲近。第二天醒来时，你内心深处最容易浮现的微妙感受是？","options":[{"key":"A","label":"心里暖洋洋的，觉得彼此理解更深了一层，对这段关系更有底气也更松弛。","weights":{"R1":2.0,"D1":-1.0,"V2":-1.0,"A1":-0.6}},{"key":"B","label":"有一点点暴露软肋后的害羞，但看到对方一如既往温和的早安问候，很快就踏实下来。","weights":{"R1":1.6,"V2":0.4,"A1":0.3}},{"key":"C","label":"一边回味昨晚的甜，一边又忍不住担心：“今天TA还会像昨晚一样热情吗？会不会热度一过就淡了？”","weights":{"A1":2.0,"D1":0.6}},{"key":"D","label":"后知后觉有点别扭和不自在，觉得昨晚说得太多太满，今天下意识想收着点、恢复独立克制的样子。","weights":{"V2":2.0,"V1":1.4}},{"key":"E","label":"突然涌起一阵莫名的心慌和防备，总觉得“这么好不真实，越投入以后摔得越痛”，甚至想故意找点茬降温。","weights":{"D1":2.5,"V2":1.2,"A1":1.2,"R1":-1.0}}]},{"id":31,"part":"scenario","context":"情境七 · 边界取舍","text":"周末你原本很想宅家休息，但伴侣兴致勃勃地约你一起去参加TA朋友们的聚会。你最真实的做法通常是？","options":[{"key":"A","label":"坦诚说“这周实在太累想在家歇着，你去玩得开心，下次状态好我再陪你去”，说完毫无心理负担。","weights":{"R1":2.0,"A2":-1.2,"V1":-0.2}},{"key":"B","label":"主动商量折中方案，比如“聚会我就不去了，等你散场我去接你一起吃宵夜”，兼顾休息与陪伴。","weights":{"R1":1.9,"A2":0.3}},{"key":"C","label":"硬着头皮答应下来陪TA去，全程强打精神配合笑脸，回来累瘫了却在心里暗暗委屈“为什么总是我在迁就”。","weights":{"A2":2.4,"V2":0.6,"R1":-0.6}},{"key":"D","label":"干脆利落拒绝，并且如果对方流露出一丝失落或软磨硬泡，就会觉得个人边界被冒犯、心里开始烦躁。","weights":{"V1":2.2,"V2":1.0,"R1":-0.5}},{"key":"E","label":"本来不想去，但转念担心“我不去TA会不会跟别人玩嗨了把我冷落了”，最后带着紧绷感跟去盯场。","weights":{"A1":1.8,"D1":1.4,"A2":0.6}}]},{"id":32,"part":"scenario","context":"情境八 · 平淡适应","text":"在一起大半年后，热恋期的高频激情慢慢退去，日常聊天更多变成了生活琐事与各自忙碌。面对这种平淡期，你的真实状态是？","options":[{"key":"A","label":"挺喜欢这种细水长流的松弛感，平时各自专注生活，周末依然会自然约会留出相处温度。","weights":{"R1":2.0,"A1":-1.0,"V1":-0.8}},{"key":"B","label":"偶尔会怀念刚在一起时的热闹，但会直接拉着对方策划一次短途散心或深入夜聊，主动给关系保鲜。","weights":{"R1":1.9,"A1":0.4}},{"key":"C","label":"很不适应这种落差，总觉得“变平淡就是不爱了的前兆”，容易因为对方没以前热烈而反复失落或试探。","weights":{"A1":2.3,"D1":0.6,"R1":-0.6}},{"key":"D","label":"反而觉得终于回到了最省心的相处模式——不用每天费劲提供情绪价值，各忙各的、互不折腾最好。","weights":{"V1":2.2,"V2":1.4}},{"key":"E","label":"一会儿觉得平淡乏味想抽身离开，一会儿看到对方稍微疏远又突然心慌抓紧，自己也拿不准到底想要什么。","weights":{"D1":2.5,"A1":1.0,"V1":1.0,"R1":-0.8}}]}],"archetypes":[{"id":"grounded_secure","code":"S1","name":"自在安全型","quadrant":"亲密又自在","character_title":"松弛笃定的稳定派","image":"./characters/01-grounded-secure.png","webp":"./characters/01-grounded-secure.webp","color":"#1F8A65","soft_color":"#EAF5F0","prototype":{"A1":16,"A2":18,"V1":16,"V2":18,"D1":12,"R1":88},"tagline":"亲近时不迷失自我，独处时不怀疑爱意。","summary":"你在亲密关系里拥有天然的恒温底座。对你而言，依赖与独立并不是非此即彼的单选题：对方靠近时你能坦然接住温度，对方忙碌或需要空间时你也能安心过好自己的节奏。","core_mechanism":"你内心深处相信自己是值得被爱的，也默认伴侣抱有善意。因此你很少把对方的短暂忙碌解读成冷落，也不会把敞开心扉当成一件危险的事。","strengths":["情绪底盘稳，遇到晚回消息或计划临时变动时，习惯先了解原因而不是急着往坏处想","能把“我需要什么”具体、直接、温和地说出来，极少用冷战或试探迂回表达","既能提供稳定的情感支持，也能坦然向伴侣求助和示弱"],"blind_spots":["面对高敏感或高防御伴侣时，可能低估对方内心的惊涛骇浪，觉得“这么点小事至于吗”","长期承担关系里的“稳定器”角色时，偶尔会忽略自己也需要被主动细致地照顾"],"partner_view":"和你相处像把心放在稳稳的暖光灯塔下——有话可以直说，不必时刻踮着脚尖猜谜。","growth_actions":["与高敏感伴侣相处时，在讲解决方案前多给一句明确的情感确认（如“我还在，我们一起看怎么办”）","与慢热回避伴侣相处时，把留空间说成清晰的约定（如“你先歇一晚，明晚八点我们聊聊”），帮对方卸下压迫感"],"best_match":"成长安全型、自在安全型（同频稳健）；对讨好焦虑型与慢热回避型也有很强的安抚力。","watch_out":"与推拉矛盾型长期拉扯时，需守住清晰的沟通底线，避免单方面过度消耗。"},{"id":"mindful_secure","code":"S2","name":"成长安全型","quadrant":"亲密又自在","character_title":"懂沟通的关系修复派","image":"./characters/02-mindful-secure.png","webp":"./characters/02-mindful-secure.webp","color":"#0F766E","soft_color":"#ECF6F5","prototype":{"A1":38,"A2":38,"V1":34,"V2":36,"D1":26,"R1":80},"tagline":"并非从不起风浪，而是懂得在风雨里把花护好。","summary":"你的稳定不是天生的“毫无波澜”，而是带着自我觉察修出来的成熟能力。在关系里你同样会有小失落、小忐忑或需要喘口气的时刻，但你懂得在情绪冲动和实际行动之间留出一个缓冲带。","core_mechanism":"你能清楚感知自己什么时候开始不安、什么时候需要空间，并且愿意在情绪涌上来时先缓一缓，再用好好说话的方式把疙瘩解开，而不是任由冲动伤人。","strengths":["共情力往往比天生钝感的人更细腻，既懂焦虑者的不安，也懂回避者对空间的需要","吵架时懂得先给彼此留出冷静缓冲，平复后再主动把话聊透，不轻易把分歧拖成冷战","愿意把关系当成共同培育的花园，在磨合中不断迭代相处方式"],"blind_spots":["在高压、极度疲惫或伴侣持续拒绝沟通时，旧有的焦虑或退缩惯性仍可能阶段性浮现","有时对自己要求过高，总想当那个“更懂事、更会沟通”的人，容易积累隐性心累"],"partner_view":"你不是没有脾气或软肋，但每次遇到卡点，你总愿意伸出手说“我们把这件事慢慢理顺”。","growth_actions":["允许自己偶尔“不那么成熟完美”，不必每次都独自完成全部情绪消化才开口","当伴侣长期不配合修复时，区分“我的沟通方式问题”与“对方的课题”，不必把关系责任全揽在自己身上"],"best_match":"自在安全型、慢热回避型、讨好焦虑型（彼此珍惜并能形成正向反馈闭环）。","watch_out":"面对长期拒绝沟通的独立回避型时，注意别让自己退回单向追逐或自我怀疑。"},{"id":"protest_anxious","code":"A1","name":"确认焦虑型","quadrant":"敏感更在意","character_title":"渴望及时回应的直球派","image":"./characters/03-protest-anxious.png","webp":"./characters/03-protest-anxious.webp","color":"#E0523C","soft_color":"#FFF3EB","prototype":{"A1":84,"A2":52,"V1":20,"V2":24,"D1":46,"R1":34},"tagline":"在乎就会忍不住反复确认，只想知道你依然坚定站在我这边。","summary":"你在感情里热烈、真挚、投入度极高，但也像戴着高灵敏度接收器——对方的回复速度、标点符号、语气起伏都会第一时间牵动你的神经。一旦感到联结变弱，你会本能地想立刻追问、确认、把对方拉回视线里。","core_mechanism":"因为太珍视这段联结，一旦感觉到一丝不确定或冷落，你心里的警报就会立刻响起，让你很想马上得到一个确切的答案来让自己安心。","strengths":["情感浓度高、真诚不敷衍，对伴侣的情绪变化和关系温度有极强的感知力","重视亲密联结，愿意投入时间与心力经营感情，绝不轻易冷暴力","只要得到清晰稳定的回应和定心丸，就能迅速恢复活力与温柔"],"blind_spots":["容易把“对方此刻忙/累”等同于“对方不爱了”，在焦虑驱使下用质问代替表达想念","越害怕失去越用力抓紧，反而容易让慢热或需要空间的伴侣感到压力而后退"],"partner_view":"你爱得鲜活又滚烫，只是不安起来像连环响起的小闹钟，让人来不及解释就先慌了阵脚。","growth_actions":["练习“黄金二十分钟缓冲”：焦虑冲上来想连发质问时，先把手机放下做一件具体的身体小事，区分“事实”与“脑补”","把抗议句翻译成需求句——把“你是不是烦我了？”换成“今天没怎么聊，我有点想你，忙完给我打个五分钟电话好不好？”"],"best_match":"自在安全型、成长安全型（能稳稳接住你的信号并给出清晰预期）。","watch_out":"与独立回避型极易触发“越追越逃、越逃越追”的追逃循环。"},{"id":"fawning_anxious","code":"A2","name":"讨好焦虑型","quadrant":"敏感更在意","character_title":"习惯迁就体贴的顺应派","image":"./characters/04-fawning-anxious.png","webp":"./characters/04-fawning-anxious.webp","color":"#D96B78","soft_color":"#FDF0F2","prototype":{"A1":62,"A2":86,"V1":28,"V2":50,"D1":36,"R1":40},"tagline":"把所有体贴都端到你面前，却把自己的委屈悄悄藏在袖口。","summary":"你细腻温和、极度善解人意，但你的焦虑很少表现为大吵大闹，而是表现为“过度懂事”。因为害怕冲突、害怕显得麻烦或让伴侣失望，你常常习惯先察言观色、优先满足对方，把自己的真实需求一再往后排。","core_mechanism":"你潜意识里容易把“被爱”和“懂事、不添麻烦”绑在一起，总怕一旦提出不满或拒绝，就会破坏气氛甚至让对方没那么喜欢你了。","strengths":["极强的换位思考与照顾能力，总能敏锐接住身边人的情绪细节","处事温和有分寸，很少主动挑起恶意攻击，让人感到被妥帖善待","对关系忠诚认真，愿意为了双方和谐付出实实在在的行动"],"blind_spots":["习惯说“我都行、我没事”，导致伴侣根本不知道你的真实底线，委屈攒到临界点才突然心寒或崩溃","把伴侣的负面情绪揽成自己的责任，对方一皱眉就紧张是不是自己哪里没做好"],"partner_view":"你总是笑眯眯地把热茶递过来，可我有时更希望你能任性一次，直接告诉我你真正想要什么。","growth_actions":["每周做一次低风险“真实偏好练习”：从吃什么、去不去聚会开始，直接说出第一真实想法而不是“看你”","记住：健康的亲密关系建立在“真实的你被看见”之上，过度体贴换来的往往是对你的习惯性忽视而非更深的珍惜"],"best_match":"自在安全型、成长安全型（会主动询问并鼓励你表达真实感受，不滥用你的好脾气）。","watch_out":"遇到自我中心或独立回避型伴侣时，容易陷入长期单向付出却不被看见的隐性消耗。"},{"id":"dismissing_avoidant","code":"V1","name":"独立回避型","quadrant":"独立重边界","character_title":"重视个人空间的理性派","image":"./characters/05-dismissing-avoidant.png","webp":"./characters/05-dismissing-avoidant.webp","color":"#2563EB","soft_color":"#EEF4FC","prototype":{"A1":18,"A2":20,"V1":86,"V2":82,"D1":28,"R1":40},"tagline":"自带清晰的罗盘与边界，独善其身是最熟悉的铠甲。","summary":"你冷静、独立、目标清晰，把个人空间与自主掌控感看得至关重要。你并不一定排斥伴侣关系，但对密集的情绪索取、时刻报备或过度黏腻有天然的排斥反应；遇到压力和争执时，你最信任的永远是退回自己的世界独自解决。","core_mechanism":"你从小到大习惯了靠自己解决问题，把保持清醒与自主视为最大的安全感来源；一旦关系靠得太密、情绪太浓，你就会本能地想退后一步透透气。","strengths":["情绪内核稳健独立，不把伴侣当成情绪垃圾桶或全天候保姆","尊重彼此的个人事业、兴趣与独处自由，关系里不搞道德绑架与无理纠缠","面对外部现实危机时冷静果断，擅长解决具体问题"],"blind_spots":["容易把伴侣正常的想念与情感确认当成“无理取闹或控制”，用讲道理或沉默把人推远","下意识切断深层脆弱表达，时间久了容易让亲密关系停留在礼貌客气的室友层面"],"partner_view":"你像一座干净清醒的冰川岛屿，靠得太近怕打扰你的航线，离得远了又猜不透你到底需不需要我。","growth_actions":["需要空间时用“带归期的说明”代替直接消失——多说一句“我想自己静两小时，十点找你”，就能化解对方八成恐慌","练习把小比例的疲惫或犹豫分享给伴侣，你会发现适度示弱并不会让你失去自由，反而能减少无谓猜忌"],"best_match":"自在安全型、成长安全型（情绪自足不逼迫，能给你呼吸空间同时温和引导联结）。","watch_out":"与确认焦虑型最容易形成“一方追问、一方关门”的对抗消耗。"},{"id":"withdrawn_avoidant","code":"V2","name":"慢热回避型","quadrant":"独立重边界","character_title":"有事自己扛的内敛派","image":"./characters/06-withdrawn-avoidant.png","webp":"./characters/06-withdrawn-avoidant.webp","color":"#3B6E5C","soft_color":"#EFF4F1","prototype":{"A1":34,"A2":44,"V1":54,"V2":86,"D1":34,"R1":46},"tagline":"平时温和好相处，一到难过或起冲突就习惯把心门轻轻关上。","summary":"你日常温和友善、并不冷漠，甚至很珍惜安静陪伴的温度；但你心底有一道很少对外敞开的深门。开心时你可以很好相处，可一旦自己受了委屈、感到无助或面对冲突低气压，你的第一本能就是退回自己的角落独自消化，绝不轻易麻烦别人。","core_mechanism":"你并不排斥温暖的日常陪伴，只是不习惯把脆弱、委屈和无助摊开在别人面前；对你来说，躲起来安静消化往往比开口求助更觉得安全。","strengths":["性情温和内敛，善于倾听，给人安静舒服、不具攻击性的陪伴感","自我消化与独处能力强，不会轻易把失控脾气撒在伴侣身上","一旦经过时间检验认定一个人，情感深沉且长情"],"blind_spots":["难过时习惯性说“没事”，让真正想关心你的伴侣屡屡碰壁、产生深深的无力感","面对激烈冲突容易直接卡壳失语、躲进壳里，导致积压的误会迟迟得不到清理"],"partner_view":"平时明明温柔又好相处，可一到你真正难过的时候，就像轻轻合上了木窗，让我不知道该怎么走进去抱抱你。","growth_actions":["当暂时说不出完整感受时，先给伴侣留一扇小窗：“我现在还理不清怎么说，不是生你的气，给我一点时间慢慢讲给你听”","尝试从小事上麻烦伴侣一次（比如请对方顺手带杯热饮或听五分钟吐槽），体验“被接住”的安全感"],"best_match":"成长安全型、自在安全型（有耐心等你整理好情绪、不逼问不催促，让安全感慢慢生长）。","watch_out":"与同样习惯沉默的回避型伴侣在一起时，需警惕双方都把话憋在心里演变成默契冷淡。"},{"id":"fearful_guarded","code":"D1","name":"戒备矛盾型","quadrant":"渴望又防备","character_title":"想靠近又怕受伤的谨慎派","image":"./characters/07-fearful-guarded.png","webp":"./characters/07-fearful-guarded.webp","color":"#7C4D8B","soft_color":"#F4EFF7","prototype":{"A1":68,"A2":66,"V1":68,"V2":80,"D1":62,"R1":30},"tagline":"心里很渴望被坚定偏爱，身体却总会先一步举起防备的盾牌。","summary":"你内心敏感细腻、深藏着对真挚亲密的渴望，却又很难轻易相信自己会被长久坚定地善待。既渴望有人真正懂你，又害怕暴露软肋后换来失望或离开，因此在真正投入前总是反复观察、小心设防。","core_mechanism":"你对感情越看重，就越害怕看错人或半途被辜负；为了不让未来的失望太痛，你常常在自己真正陷进去之前，先把防备心立起来保护自己。","strengths":["洞察力与共情深度极佳，对人性的脆弱、真诚与敷衍有着敏锐直觉","一旦确认安全、跨过信任门槛，会展现出极其珍贵的深情与细腻体贴","有很强的自省意识，不轻易玩弄感情"],"blind_spots":["在关系还没出问题时就提前预设“反正早晚会失望”，不自觉地用冷淡或退缩把好感挡在门外","心里明明很需要安慰，嘴上却说反话或表现得无所谓，容易让真心靠近的人误以为你没兴趣"],"partner_view":"能感觉到你眼神里的温柔和在乎，可每当我往近走一步，你总会本能地先把盾牌举到胸口。","growth_actions":["用“小步渐进信任”替代全有或全无的考验：每次只敞开 10%，观察对方的实际回应，用当下的真实证据更新旧有防备","察觉自己想说反话推开对方时，试着坦白那句底牌：“其实我很在乎，只是有点怕受伤所以刚刚嘴硬了”"],"best_match":"自在安全型、成长安全型（言行一致、边界清晰且稳定兑现承诺的人最能融化你的戒备）。","watch_out":"与推拉矛盾型或忽冷忽热的人互动时，极易反复验证“果然不能相信别人”的悲观预期。"},{"id":"oscillating_disorganized","code":"D2","name":"推拉矛盾型","quadrant":"渴望又防备","character_title":"忽远忽近的拉扯派","image":"./characters/08-oscillating-disorganized.png","webp":"./characters/08-oscillating-disorganized.webp","color":"#C83E5B","soft_color":"#F5F1F6","prototype":{"A1":78,"A2":60,"V1":72,"V2":68,"D1":88,"R1":22},"tagline":"远了忍不住想抓紧，太近了又突然心慌想后退。","summary":"你在关系里的体验往往浓烈而充满张力，像同时踩下了亲密油门与防御刹车：距离远了你会强烈思念、焦虑抓紧；可一旦对方真的毫无保留地靠近，你内心深处又会突然涌起失控感与恐慌，本能地想抽身降温甚至先一步推开。","core_mechanism":"你心里同时住着“极度渴望被爱”和“极度害怕失控受伤”两股力量：离得远时渴望占上风，靠得太近时恐惧又占了上风，让你自己也常在热情与抽离之间感到心累。","strengths":["生命力与情感张力充沛，对深刻灵魂共鸣有着远超常人的敏锐感知","极其厌恶虚伪敷衍，在自我觉察开启后往往具备很强的心理成长爆发力","能够理解复杂多面的情绪体验，对同样经历过内心拉扯的人充满包容"],"blind_spots":["亲密最高点恰恰最容易触发恐慌开关（“太好了不真实，不如趁还没被抛弃先撤退”），无意中亲手破坏正在变好的关系","情绪剧烈起伏时容易把日常小摩擦解读成彻底背叛，让伴侣感到无所适从"],"partner_view":"靠近你像靠近一场绚烂又捉摸不定的潮汐——昨天还紧紧相拥，今天却像突然隔了一片海。","growth_actions":["给自己的“推开冲动”贴上识别标签：当甜蜜过后突然想找茬或逃跑时，告诉自己“这是我的防御警报误响了，不必立刻行动”，延缓 48 小时再做决定","与伴侣建立安全的“降速暗号”，感到淹没时请求短暂缓一缓，而不是用决绝狠话把桥烧断"],"best_match":"自在安全型、成长安全型（内核稳固、不被推拉卷入情绪漩涡，同时能温和守住清晰边界）。","watch_out":"两个推拉矛盾型或与确认焦虑型碰撞时，容易演变成高强度的情绪拉扯，需要格外重视情绪降速。"}]};
+
+    const state = {
+      currentIndex: 0,
+      answers: new Map(),
+      isCompleted: false,
+      lastResult: null,
+      galleryFilter: "all",
+    };
+
+    const els = {
+      headerStep: document.getElementById("header-step"),
+      postQuizTabs: document.getElementById("post-quiz-tabs"),
+      tabResult: document.getElementById("tab-result"),
+      tabGallery: document.getElementById("tab-gallery"),
+      tabRestart: document.getElementById("tab-restart"),
+      viewQuiz: document.getElementById("view-quiz"),
+      viewResult: document.getElementById("view-result"),
+      viewGallery: document.getElementById("view-gallery"),
+      sceneBadge: document.getElementById("scene-badge"),
+      progressCounter: document.getElementById("progress-counter"),
+      progressFill: document.getElementById("progress-fill"),
+      qStem: document.getElementById("q-stem"),
+      qInstruction: document.getElementById("q-instruction"),
+      optionContainer: document.getElementById("option-container"),
+      prevBtn: document.getElementById("prev-btn"),
+      nextBtn: document.getElementById("next-btn"),
+      nextBtnLabel: document.getElementById("next-btn-label"),
+      inlineCastGrid: document.getElementById("inline-cast-grid"),
+      galleryGrid: document.getElementById("gallery-grid"),
+      archModal: document.getElementById("arch-modal"),
+    };
+
+    function getAvatarSrc(arch) {
+      return arch.webp || arch.image;
+    }
+
+    function switchPostView(target) {
+      els.viewQuiz.hidden = true;
+      els.viewResult.hidden = target !== "result";
+      els.viewGallery.hidden = target !== "gallery";
+      els.tabResult.classList.toggle("is-active", target === "result");
+      els.tabGallery.classList.toggle("is-active", target === "gallery");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function resetToQuiz() {
+      state.answers.clear();
+      state.currentIndex = 0;
+      state.isCompleted = false;
+      state.lastResult = null;
+      els.headerStep.hidden = false;
+      els.postQuizTabs.hidden = true;
+      els.viewResult.hidden = true;
+      els.viewGallery.hidden = true;
+      els.viewQuiz.hidden = false;
+      els.archModal.hidden = true;
+      document.documentElement.style.setProperty("--theme", "#1F8A65");
+      document.documentElement.style.setProperty("--theme-soft", "#EAF5F0");
+      try { window.history.replaceState(null, "", window.location.pathname); } catch (_) {}
+      renderQuestion();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function scoreSubmission(answerMap) {
+      const facetsMeta = QUIZ_DATA.facets;
+      const facetKeys = Object.keys(facetsMeta);
+      const partASums = {};
+      const sjtSums = {};
+      const fwdByFacet = {};
+      const revRawByFacet = {};
+
+      facetKeys.forEach((f) => {
+        partASums[f] = 0;
+        sjtSums[f] = 0;
+        fwdByFacet[f] = [];
+        revRawByFacet[f] = [];
+      });
+
+      QUIZ_DATA.questions.forEach((q) => {
+        const ans = answerMap.get(q.id);
+        if (q.part === "frequency") {
+          const val = Number(ans);
+          if (q.reverse) {
+            revRawByFacet[q.facet].push(val);
+            partASums[q.facet] += (7 - val);
+          } else {
+            fwdByFacet[q.facet].push(val);
+            partASums[q.facet] += val;
+          }
+        } else {
+          const opt = q.options.find((o) => o.key === ans);
+          if (opt) {
+            Object.entries(opt.weights).forEach(([f, w]) => {
+              sjtSums[f] += w;
+            });
+          }
+        }
+      });
+
+      const facetsPct = {};
+      facetKeys.forEach((f) => {
+        const paPct = ((partASums[f] - 4.0) / 20.0) * 100.0;
+        const bounds = QUIZ_DATA.sjt_bounds[f];
+        const sRaw = sjtSums[f];
+        let pbPct = 50.0;
+        if (sRaw >= 0) {
+          const denom = Math.max(1.0, bounds.max_pos * 0.75);
+          pbPct = 50.0 + 50.0 * Math.min(1.0, sRaw / denom);
+        } else {
+          const denom = Math.max(1.0, Math.abs(bounds.min_neg) * 0.85);
+          pbPct = 50.0 - 50.0 * Math.min(1.0, Math.abs(sRaw) / denom);
+        }
+        const combined = 0.68 * paPct + 0.32 * pbPct;
+        facetsPct[f] = Math.round(Math.max(0, Math.min(100, combined)));
+      });
+
+      let devSum = 0;
+      facetKeys.forEach((f) => {
+        const mFwd = fwdByFacet[f].reduce((a, b) => a + b, 0) / fwdByFacet[f].length;
+        const mRev = revRawByFacet[f].reduce((a, b) => a + b, 0) / revRawByFacet[f].length;
+        devSum += Math.abs((mFwd + mRev) - 7.0);
+      });
+      const meanDev = devSum / facetKeys.length;
+      const consistencyScore = (1.0 - meanDev / 5.0) * 100.0;
+      const consistencyWarning = consistencyScore < 48.0;
+
+      const { A1, A2, V1, V2, D1, R1 } = facetsPct;
+      const anxiety = Math.round(0.46 * A1 + 0.34 * A2 + 0.12 * D1 + 0.08 * (100 - R1));
+      const avoidance = Math.round(0.46 * V1 + 0.34 * V2 + 0.12 * D1 + 0.08 * (100 - R1));
+      const security = Math.round(0.34 * (100 - anxiety) + 0.34 * (100 - avoidance) + 0.14 * (100 - D1) + 0.18 * R1);
+      const disorganization = Math.round(0.54 * D1 + 0.34 * Math.sqrt(Math.max(0, anxiety * avoidance)) + 0.12 * (100 - R1));
+
+      const weights = QUIZ_DATA.scoring_spec.prototype_feature_weights;
+      const sigma = QUIZ_DATA.scoring_spec.rbf_sigma;
+      const rawAff = {};
+
+      QUIZ_DATA.archetypes.forEach((arch) => {
+        let sq = 0;
+        let wSum = 0;
+        Object.entries(weights).forEach(([f, w]) => {
+          const d = facetsPct[f] - arch.prototype[f];
+          sq += w * d * d;
+          wSum += w;
+        });
+        const rms = Math.sqrt(sq / wSum);
+        rawAff[arch.id] = Math.exp(-(rms * rms) / (2 * sigma * sigma));
+      });
+
+      const totalAff = Object.values(rawAff).reduce((a, b) => a + b, 0) || 1;
+      const r1 = (x) => Math.round(x * 10) / 10;
+      const affinities = {};
+      QUIZ_DATA.archetypes.forEach((arch) => {
+        affinities[arch.id] = r1((rawAff[arch.id] / totalAff) * 100);
+      });
+
+      const ranked = [...QUIZ_DATA.archetypes].sort((a, b) => rawAff[b.id] - rawAff[a.id]);
+      const sumAff = Object.values(affinities).reduce((a, b) => a + b, 0);
+      affinities[ranked[0].id] = r1(affinities[ranked[0].id] + (100 - sumAff));
+
+      const primary = ranked[0];
+      const secondary = ranked[1];
+      const gap = r1(affinities[primary.id] - affinities[secondary.id]);
+
+      return {
+        primary,
+        secondary,
+        isBlend: gap < QUIZ_DATA.scoring_spec.blend_gap_threshold,
+        gap,
+        affinities,
+        facets: facetsPct,
+        dimensions: {
+          anxiety,
+          avoidance,
+          security,
+          disorganization,
+        },
+        consistency: {
+          warning: consistencyWarning,
+        },
+      };
+    }
+
+    function renderQuestion() {
+      const total = QUIZ_DATA.questions.length;
+      const q = QUIZ_DATA.questions[state.currentIndex];
+      const done = state.answers.size;
+      const selected = state.answers.get(q.id);
+
+      const isPartA = q.part === "frequency";
+      els.headerStep.textContent = `已完成 ${done} / ${total}`;
+      els.sceneBadge.textContent = q.context.replace(/^情境. · /, "相处情境 · ");
+      els.progressCounter.textContent = `第 ${state.currentIndex + 1} / ${total} 题`;
+      els.progressFill.style.width = `${((state.currentIndex + 1) / total) * 100}%`;
+
+      els.qStem.textContent = q.text;
+      els.qInstruction.textContent = isPartA
+        ? "回想你在亲密关系里的真实状态，不必选“应该怎么做”："
+        : "如果遇到下面这一幕，哪一项最像你的第一反应？";
+
+      els.optionContainer.innerHTML = "";
+      const wrap = document.createElement("div");
+      wrap.className = isPartA ? "freq-grid" : "sjt-list";
+
+      if (isPartA) {
+        QUIZ_DATA.frequency_scale.forEach((opt) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "opt-btn" + (selected === opt.value ? " is-selected" : "");
+          btn.innerHTML = `
+            <span class="opt-key">${opt.value}</span>
+            <span class="opt-body">
+              <span class="opt-label">${opt.label}</span>
+              <span class="opt-hint">${opt.hint}</span>
+            </span>
+          `;
+          btn.addEventListener("click", () => handleAnswer(q.id, opt.value));
+          wrap.appendChild(btn);
+        });
+      } else {
+        q.options.forEach((opt) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "opt-btn" + (selected === opt.key ? " is-selected" : "");
+          btn.innerHTML = `
+            <span class="opt-key">${opt.key}</span>
+            <span class="opt-body">
+              <span class="opt-label">${opt.label}</span>
+            </span>
+          `;
+          btn.addEventListener("click", () => handleAnswer(q.id, opt.key));
+          wrap.appendChild(btn);
+        });
+      }
+
+      els.optionContainer.appendChild(wrap);
+      els.prevBtn.disabled = state.currentIndex === 0;
+      els.nextBtnLabel.textContent = state.currentIndex === total - 1 ? "查看结果" : "下一题";
+    }
+
+    function handleAnswer(qId, val) {
+      state.answers.set(qId, val);
+      if (state.currentIndex < QUIZ_DATA.questions.length - 1) {
+        state.currentIndex += 1;
+        renderQuestion();
+      } else {
+        renderQuestion();
+        tryFinishQuiz();
+      }
+    }
+
+    function encodeAnswersToken(answerMap) {
+      const compact = QUIZ_DATA.questions.map((q) => answerMap.get(q.id)).join("");
+      return btoa(encodeURIComponent(compact)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    }
+
+    function unlockAndShowResult(result) {
+      state.isCompleted = true;
+      state.lastResult = result;
+      els.headerStep.hidden = true;
+      els.postQuizTabs.hidden = false;
+      renderResult(result);
+      renderUnlockedCastGrids();
+      switchPostView("result");
+    }
+
+    function tryRestoreFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get("r");
+      if (!token) return false;
+      try {
+        const b64 = token.replace(/-/g, "+").replace(/_/g, "/");
+        const compact = decodeURIComponent(atob(b64));
+        if (compact.length !== 32) return false;
+        state.answers.clear();
+        for (let i = 0; i < 24; i++) {
+          const v = Number(compact[i]);
+          if (!(v >= 1 && v <= 6)) return false;
+          state.answers.set(i + 1, v);
+        }
+        for (let i = 24; i < 32; i++) {
+          const k = compact[i];
+          if (!["A", "B", "C", "D", "E"].includes(k)) return false;
+          state.answers.set(i + 1, k);
+        }
+        const res = scoreSubmission(state.answers);
+        renderQuestion();
+        unlockAndShowResult(res);
+        return true;
+      } catch (_) {
+        return false;
+      }
+    }
+
+    function tryFinishQuiz() {
+      const missingIdx = QUIZ_DATA.questions.findIndex((q) => !state.answers.has(q.id));
+      if (missingIdx >= 0) {
+        state.currentIndex = missingIdx;
+        renderQuestion();
+        alert(`第 ${missingIdx + 1} 题还没有选择，答完就能看到结果啦。`);
+        return;
+      }
+      const result = scoreSubmission(state.answers);
+      try {
+        const tok = encodeAnswersToken(state.answers);
+        window.history.replaceState(null, "", `?r=${tok}`);
+      } catch (_) {}
+      unlockAndShowResult(result);
+    }
+
+    function buildCoordinateSVG(anx, avo, primaryColor) {
+      const size = 340;
+      const pad = 38;
+      const inner = size - pad * 2;
+      const cx = pad + (anx / 100) * inner;
+      const cy = pad + ((100 - avo) / 100) * inner;
+      const mid = pad + inner / 2;
+
+      let protoDots = "";
+      QUIZ_DATA.archetypes.forEach((a) => {
+        const p = a.prototype;
+        const pAnx = 0.46 * p.A1 + 0.34 * p.A2 + 0.12 * p.D1 + 0.08 * (100 - p.R1);
+        const pAvo = 0.46 * p.V1 + 0.34 * p.V2 + 0.12 * p.D1 + 0.08 * (100 - p.R1);
+        const px = pad + (pAnx / 100) * inner;
+        const py = pad + ((100 - pAvo) / 100) * inner;
+        protoDots += `
+          <circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="4" fill="${a.color}" opacity="0.4" />
+          <text x="${px.toFixed(1)}" y="${(py - 7).toFixed(1)}" text-anchor="middle" font-size="10" fill="#52606D">${a.name}</text>
+        `;
+      });
+
+      return `
+        <svg viewBox="0 0 ${size} ${size}" role="img" aria-label="关系位置分布图">
+          <rect x="${pad}" y="${pad}" width="${inner}" height="${inner}" rx="6" fill="#F8FAFB" stroke="#DCE2E6" />
+          <line x1="${mid}" y1="${pad}" x2="${mid}" y2="${pad + inner}" stroke="#CBD5E1" stroke-dasharray="4 4" />
+          <line x1="${pad}" y1="${mid}" x2="${pad + inner}" y2="${mid}" stroke="#CBD5E1" stroke-dasharray="4 4" />
+          <text x="${pad + 8}" y="${pad + 16}" font-size="10" fill="#64748B">独立重边界</text>
+          <text x="${pad + inner - 8}" y="${pad + 16}" text-anchor="end" font-size="10" fill="#64748B">渴望又防备</text>
+          <text x="${pad + 8}" y="${pad + inner - 8}" font-size="10" fill="#64748B">亲密又自在</text>
+          <text x="${pad + inner - 8}" y="${pad + inner - 8}" text-anchor="end" font-size="10" fill="#64748B">敏感更在意</text>
+          ${protoDots}
+          <circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="12" fill="${primaryColor}" opacity="0.18" />
+          <circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="6.5" fill="${primaryColor}" stroke="#FFFFFF" stroke-width="2" />
+          <text x="${mid}" y="${size - 10}" text-anchor="middle" font-size="11" font-weight="600" fill="#4B5866">焦虑敏感度 (${anx}%) →</text>
+          <text x="13" y="${mid}" text-anchor="middle" font-size="11" font-weight="600" fill="#4B5866" transform="rotate(-90 13 ${mid})">亲密回避度 (${avo}%) →</text>
+        </svg>
+      `;
+    }
+
+    function renderResult(res) {
+      const p = res.primary;
+      const s = res.secondary;
+
+      document.documentElement.style.setProperty("--theme", p.color);
+      document.documentElement.style.setProperty("--theme-soft", p.soft_color);
+
+      document.getElementById("consistency-banner").hidden = !res.consistency.warning;
+
+      const imgEl = document.getElementById("res-img");
+      imgEl.src = getAvatarSrc(p);
+      imgEl.alt = p.name;
+
+      document.getElementById("res-code-tag").textContent = `你的主类型 · 契合度 ${res.affinities[p.id]}%`;
+      document.getElementById("res-quadrant-tag").textContent = p.quadrant;
+      const blendTag = document.getElementById("res-blend-tag");
+      blendTag.hidden = !res.isBlend;
+      if (res.isBlend) {
+        blendTag.textContent = `同时带有「${s.name}」特点`;
+      }
+
+      document.getElementById("res-name").textContent = p.name;
+      document.getElementById("res-subtitle").textContent = p.character_title;
+      document.getElementById("res-tagline").textContent = p.tagline;
+      document.getElementById("res-summary").textContent = p.summary;
+
+      document.getElementById("m-anxiety").textContent = `${res.dimensions.anxiety}%`;
+      document.getElementById("m-avoidance").textContent = `${res.dimensions.avoidance}%`;
+      document.getElementById("m-security").textContent = `${res.dimensions.security}%`;
+      document.getElementById("m-disorg").textContent = `${res.dimensions.disorganization}%`;
+
+      document.getElementById("coord-map").innerHTML = buildCoordinateSVG(
+        res.dimensions.anxiety,
+        res.dimensions.avoidance,
+        p.color
+      );
+
+      const facetContainer = document.getElementById("facet-bars");
+      facetContainer.innerHTML = "";
+      Object.entries(QUIZ_DATA.facets).forEach(([fid, fmeta]) => {
+        const val = res.facets[fid];
+        const row = document.createElement("div");
+        row.className = "bar-row";
+        row.innerHTML = `
+          <div class="bar-head">
+            <span class="bar-title">${fmeta.name}</span>
+            <span class="bar-num">${val}%</span>
+          </div>
+          <div class="bar-bg">
+            <div class="bar-fg" style="width:${val}%; background:${fmeta.color};"></div>
+          </div>
+        `;
+        facetContainer.appendChild(row);
+      });
+
+      const affContainer = document.getElementById("affinity-bars");
+      affContainer.innerHTML = "";
+      const sortedArchs = [...QUIZ_DATA.archetypes].sort((a, b) => res.affinities[b.id] - res.affinities[a.id]);
+      sortedArchs.forEach((arch, idx) => {
+        const pct = res.affinities[arch.id];
+        const badge = idx === 0 ? "（主类型）" : idx === 1 ? "（第二倾向）" : "";
+        const row = document.createElement("div");
+        row.className = "bar-row";
+        row.innerHTML = `
+          <div class="bar-head">
+            <span class="bar-title">${arch.name} · ${arch.character_title} ${badge}</span>
+            <span class="bar-num">${pct}%</span>
+          </div>
+          <div class="bar-bg">
+            <div class="bar-fg" style="width:${Math.min(100, pct * 1.4)}%; background:${arch.color};"></div>
+          </div>
+        `;
+        affContainer.appendChild(row);
+      });
+
+      document.getElementById("sec-img").src = getAvatarSrc(s);
+      document.getElementById("sec-img").alt = s.name;
+      document.getElementById("sec-kicker").textContent = res.isBlend
+        ? `并列倾向 · 契合度 ${res.affinities[s.id]}%`
+        : `你的潜在第二面 · 契合度 ${res.affinities[s.id]}%`;
+      document.getElementById("sec-title").textContent = `${s.name} · ${s.character_title}`;
+      document.getElementById("sec-desc").textContent = res.isBlend
+        ? `你身上同时融合了「${p.name}」与「${s.name}」两种特质：日常相处时更接近${p.name}，当关系变得不确定或压力升高时，很容易流露出${s.name}的一面（${s.tagline}）。`
+        : `除了主类型之外，在压力变大或缺乏确定感的时刻，你也会浮现出一些「${s.name}」的反应：${s.summary}`;
+
+      document.getElementById("res-mechanism").textContent = p.core_mechanism;
+      const fillList = (id, arr) => {
+        const ul = document.getElementById(id);
+        ul.innerHTML = "";
+        arr.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          ul.appendChild(li);
+        });
+      };
+      fillList("res-strengths", p.strengths);
+      fillList("res-blindspots", p.blind_spots);
+      fillList("res-actions", p.growth_actions);
+
+      document.getElementById("res-partner-view").textContent = `伴侣眼中的你：${p.partner_view}`;
+      document.getElementById("res-match-note").textContent = `默契参考：${p.best_match}｜相处留意：${p.watch_out}`;
+    }
+
+    function openArchModal(archId) {
+      const arch = QUIZ_DATA.archetypes.find((a) => a.id === archId);
+      if (!arch) return;
+      document.getElementById("modal-img").src = getAvatarSrc(arch);
+      document.getElementById("modal-img").alt = arch.name;
+      const qEl = document.getElementById("modal-quadrant");
+      qEl.textContent = arch.quadrant;
+      qEl.style.background = arch.soft_color;
+      qEl.style.color = arch.color;
+      document.getElementById("modal-title").textContent = arch.name;
+      const subEl = document.getElementById("modal-subtitle");
+      subEl.textContent = arch.character_title;
+      subEl.style.color = arch.color;
+      document.getElementById("modal-tagline").textContent = arch.tagline;
+      document.getElementById("modal-summary").textContent = arch.summary;
+
+      const fill = (id, items) => {
+        const ul = document.getElementById(id);
+        ul.innerHTML = "";
+        items.forEach((txt) => {
+          const li = document.createElement("li");
+          li.textContent = txt;
+          ul.appendChild(li);
+        });
+      };
+      fill("modal-strengths", arch.strengths);
+      fill("modal-blindspots", arch.blind_spots);
+      fill("modal-actions", arch.growth_actions);
+      document.getElementById("modal-partner").textContent = `伴侣眼中的TA：${arch.partner_view}`;
+      els.archModal.hidden = false;
+    }
+
+    function buildCastCardsInto(container) {
+      container.innerHTML = "";
+      const myPrimaryId = state.lastResult ? state.lastResult.primary.id : null;
+      const mySecId = state.lastResult ? state.lastResult.secondary.id : null;
+
+      QUIZ_DATA.archetypes
+        .filter((arch) => state.galleryFilter === "all" || arch.code.startsWith(state.galleryFilter))
+        .forEach((arch) => {
+          const isPrimary = arch.id === myPrimaryId;
+          const isSec = arch.id === mySecId;
+          const card = document.createElement("article");
+          card.className = "arch-tile" + (isPrimary ? " is-mine" : "");
+          const pctText = state.lastResult ? `契合度 ${state.lastResult.affinities[arch.id]}%` : "";
+          const badgeHtml = isPrimary
+            ? `<span class="mine-badge" style="background:${arch.color};">你的主类型</span>`
+            : isSec
+            ? `<span class="mine-badge">第二倾向</span>`
+            : "";
+          card.innerHTML = `
+            <div class="arch-img-box" style="background:${arch.soft_color};">
+              ${badgeHtml}
+              <img src="${getAvatarSrc(arch)}" alt="${arch.name}" loading="lazy" />
+            </div>
+            <div class="arch-body">
+              <div class="arch-tag-line" style="color:${arch.color};">
+                <span>${arch.quadrant}</span>
+                <span>${pctText}</span>
+              </div>
+              <h3 class="arch-name">${arch.name}</h3>
+              <p class="arch-sub">${arch.character_title}</p>
+              <p class="arch-desc">${arch.summary}</p>
+              <button class="btn" type="button" style="width:100%;">查看详情</button>
+            </div>
+          `;
+          card.querySelector("button").addEventListener("click", () => openArchModal(arch.id));
+          container.appendChild(card);
+        });
+    }
+
+    function renderUnlockedCastGrids() {
+      if (!state.isCompleted) return;
+      buildCastCardsInto(els.inlineCastGrid);
+      buildCastCardsInto(els.galleryGrid);
+    }
+
+    async function downloadResultPoster() {
+      if (!state.lastResult) return;
+      const r = state.lastResult;
+      const p = r.primary;
+      const s = r.secondary;
+      const canvas = document.createElement("canvas");
+      canvas.width = 960;
+      canvas.height = 600;
+      const ctx = canvas.getContext("2d");
+
+      ctx.fillStyle = "#F6F7F6";
+      ctx.fillRect(0, 0, 960, 600);
+      ctx.fillStyle = "#FFFFFF";
+      ctx.strokeStyle = "#DCE2E6";
+      ctx.lineWidth = 2;
+      ctx.fillRect(28, 28, 904, 544);
+      ctx.strokeRect(28, 28, 904, 544);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(28, 28, 904, 8);
+
+      const img = new Image();
+      img.src = getAvatarSrc(p);
+      await new Promise((resolve) => {
+        if (img.complete) return resolve();
+        img.onload = resolve;
+        img.onerror = resolve;
+      });
+      if (img.naturalWidth > 0) {
+        ctx.drawImage(img, 56, 68, 320, 320);
+      }
+
+      ctx.fillStyle = p.color;
+      ctx.font = "700 16px -apple-system, PingFang SC, sans-serif";
+      ctx.fillText(`依恋风格测试 · 契合度 ${r.affinities[p.id]}%`, 408, 92);
+
+      ctx.fillStyle = "#16202A";
+      ctx.font = "800 34px -apple-system, PingFang SC, sans-serif";
+      ctx.fillText(p.name, 408, 140);
+
+      ctx.fillStyle = "#4B5866";
+      ctx.font = "600 16px -apple-system, PingFang SC, sans-serif";
+      ctx.fillText(`${p.character_title}｜潜在第二面：${s.name} (${r.affinities[s.id]}%)`, 408, 174);
+
+      ctx.fillStyle = "#16202A";
+      ctx.font = "600 17px -apple-system, PingFang SC, sans-serif";
+      ctx.fillText(p.tagline, 408, 212);
+
+      const metrics = [
+        ["焦虑敏感度", `${r.dimensions.anxiety}%`],
+        ["亲密回避度", `${r.dimensions.avoidance}%`],
+        ["关系安全感", `${r.dimensions.security}%`],
+      ];
+      metrics.forEach(([k, v], idx) => {
+        const mx = 408 + idx * 170;
+        ctx.fillStyle = "#F1F4F2";
+        ctx.fillRect(mx, 240, 156, 66);
+        ctx.fillStyle = "#6E7B88";
+        ctx.font = "500 13px -apple-system, PingFang SC, sans-serif";
+        ctx.fillText(k, mx + 12, 264);
+        ctx.fillStyle = "#16202A";
+        ctx.font = "800 20px -apple-system, PingFang SC, sans-serif";
+        ctx.fillText(v, mx + 12, 292);
+      });
+
+      const fEntries = Object.entries(QUIZ_DATA.facets);
+      fEntries.forEach(([fid, fmeta], idx) => {
+        const col = idx % 2;
+        const row = Math.floor(idx / 2);
+        const bx = 408 + col * 250;
+        const by = 342 + row * 56;
+        const val = r.facets[fid];
+        ctx.fillStyle = "#16202A";
+        ctx.font = "600 14px -apple-system, PingFang SC, sans-serif";
+        ctx.fillText(`${fmeta.short_name}  ${val}%`, bx, by);
+        ctx.fillStyle = "#E8ECEA";
+        ctx.fillRect(bx, by + 10, 224, 9);
+        ctx.fillStyle = fmeta.color;
+        ctx.fillRect(bx, by + 10, Math.round(2.24 * val), 9);
+      });
+
+      ctx.fillStyle = "#4B5866";
+      ctx.font = "500 14px -apple-system, PingFang SC, sans-serif";
+      ctx.fillText(`伴侣眼中的你：${p.partner_view}`, 56, 448);
+
+      const a = document.createElement("a");
+      a.href = canvas.toDataURL("image/png");
+      a.download = `依恋风格测试-${p.name}.png`;
+      a.click();
+    }
+
+    function bindEvents() {
+      els.tabResult.addEventListener("click", () => {
+        if (state.isCompleted) switchPostView("result");
+      });
+      els.tabGallery.addEventListener("click", () => {
+        if (state.isCompleted) switchPostView("gallery");
+      });
+      els.tabRestart.addEventListener("click", resetToQuiz);
+
+      document.querySelectorAll(".filter-seg .seg-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          state.galleryFilter = btn.dataset.q;
+          document.querySelectorAll(".filter-seg .seg-btn").forEach((b) => {
+            b.classList.toggle("is-active", b.dataset.q === state.galleryFilter);
+          });
+          renderUnlockedCastGrids();
+        });
+      });
+
+      els.prevBtn.addEventListener("click", () => {
+        if (state.currentIndex > 0) {
+          state.currentIndex -= 1;
+          renderQuestion();
+        }
+      });
+
+      els.nextBtn.addEventListener("click", () => {
+        if (state.currentIndex < QUIZ_DATA.questions.length - 1) {
+          state.currentIndex += 1;
+          renderQuestion();
+        } else {
+          tryFinishQuiz();
+        }
+      });
+
+      document.getElementById("retake-btn").addEventListener("click", resetToQuiz);
+
+      document.getElementById("modal-close-btn").addEventListener("click", () => {
+        els.archModal.hidden = true;
+      });
+      els.archModal.addEventListener("click", (e) => {
+        if (e.target === els.archModal) els.archModal.hidden = true;
+      });
+
+      document.getElementById("share-link-btn").addEventListener("click", async () => {
+        if (!state.lastResult) return;
+        const tok = encodeAnswersToken(state.answers);
+        const shareUrl = `${window.location.origin}${window.location.pathname}?r=${tok}`;
+        try {
+          await navigator.clipboard.writeText(shareUrl);
+          const lbl = document.getElementById("share-link-label");
+          lbl.textContent = "分享链接已复制";
+          setTimeout(() => { lbl.textContent = "复制分享链接"; }, 1800);
+        } catch (_) {
+          prompt("复制以下分享链接：", shareUrl);
+        }
+      });
+
+      document.getElementById("poster-btn").addEventListener("click", downloadResultPoster);
+
+      document.getElementById("copy-btn").addEventListener("click", async () => {
+        if (!state.lastResult) return;
+        const r = state.lastResult;
+        const text = [
+          `我刚测了依恋风格测试：`,
+          `我的类型：${r.primary.name}（${r.primary.character_title}，契合度 ${r.affinities[r.primary.id]}%）`,
+          `潜在第二面：${r.secondary.name}（契合度 ${r.affinities[r.secondary.id]}%）`,
+          `焦虑敏感度 ${r.dimensions.anxiety}% / 亲密回避度 ${r.dimensions.avoidance}% / 关系安全感 ${r.dimensions.security}%`,
+          `「${r.primary.tagline}」`,
+        ].join("\n");
+        try {
+          await navigator.clipboard.writeText(text);
+          const label = document.getElementById("copy-label");
+          label.textContent = "已复制";
+          setTimeout(() => { label.textContent = "复制结果文案"; }, 1800);
+        } catch (_) {
+          alert(text);
+        }
+      });
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && !els.archModal.hidden) {
+          els.archModal.hidden = true;
+          return;
+        }
+        if (els.viewQuiz.hidden || e.metaKey || e.ctrlKey || e.altKey) return;
+        const q = QUIZ_DATA.questions[state.currentIndex];
+        if (!q) return;
+        if (q.part === "frequency" && ["1", "2", "3", "4", "5", "6"].includes(e.key)) {
+          handleAnswer(q.id, Number(e.key));
+        } else if (q.part === "scenario") {
+          const upper = e.key.toUpperCase();
+          if (["A", "B", "C", "D", "E"].includes(upper)) handleAnswer(q.id, upper);
+        } else if (e.key === "ArrowLeft" && state.currentIndex > 0) {
+          state.currentIndex -= 1;
+          renderQuestion();
+        }
+      });
+    }
+
+    bindEvents();
+    renderQuestion();
+    tryRestoreFromUrl();
+  </script>
+</body>
+</html>
